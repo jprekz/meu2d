@@ -1,0 +1,10 @@
+{
+    "name": "example1",
+    "description": "meu2d example",
+    "copyright": "Copyright © 2016, jprekz",
+    "authors": ["jprekz"],
+    "license": "BSL-1.0",
+    "dependencies": {
+        "meu2d": { "path": "../../" }
+    }
+}

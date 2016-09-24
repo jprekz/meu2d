@@ -1,0 +1,27 @@
+{
+    "name": "meu2d",
+    "description": "A 2D game framework",
+    "copyright": "Copyright © 2016, jprekz",
+    "authors": ["jprekz"],
+    "license": "BSL-1.0",
+    
+    "dependencies": {
+        "derelict-sdl2": "~>2.0.0",
+        "gfm:image": "~>5.0.8"
+    },
+
+    "subPackages": [
+        "./exsamples/example1/"
+    ],
+
+    "targetType": "library",
+    "copyFiles-windows-x86_64": [
+        "libs/windows/x86_64/SDL2.dll"
+    ],
+    "copyFiles-windows-x86": [
+        "libs/windows/x86/SDL2.dll"
+    ],
+
+    "lflags-windows-x86-dmd": ["/EXETYPE:NT", "/SUBSYSTEM:WINDOWS:5.01"],
+    "libs-windows-x86_64-dmd": ["user32", "shell32", "kernel32"]
+}

@@ -1,0 +1,10 @@
+{
+	"fileVersion": 1,
+	"versions": {
+		"ae-graphics": "0.0.9",
+		"derelict-sdl2": "2.0.2",
+		"derelict-util": "2.0.6",
+		"gfm": "5.0.10",
+		"imageformats": "5.2.0"
+	}
+}

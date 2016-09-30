@@ -32,7 +32,7 @@ class DMan : GameObject {
 MeuLogger meuLogger;
 
 mixin gameMain!(() {
-    init(640, 480, "example");
+    init(640, 480, "example", WindowStatus.resizable);
     meuLogger = new MeuLogger(30, "res/mplus-1p-regular.ttf");
     global.add(meuLogger.getGameObject, int.max);
     global.add(new DMan());

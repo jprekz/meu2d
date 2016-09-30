@@ -27,16 +27,19 @@ static ~this() {
 ///     width  = ウィンドウの幅
 ///     height = ウィンドウの高さ
 ///     title  = ウィンドウのタイトル
-void init(int width, int height, string title) {
+void init(int width, int height, string title, WindowStatus ws = WindowStatus.fixed) {
     SDL_Init(SDL_INIT_EVERYTHING).enforceSDL;
 
+    const flags = SDL_WINDOW_SHOWN |
+        (ws == WindowStatus.resizable) ? SDL_WINDOW_RESIZABLE :
+        (ws == WindowStatus.maximized) ? (SDL_WINDOW_RESIZABLE | SDL_WINDOW_MAXIMIZED) : 0;
     window = SDL_CreateWindow(
             toStringz(title),
             SDL_WINDOWPOS_UNDEFINED,
             SDL_WINDOWPOS_UNDEFINED,
             width,
             height,
-            SDL_WINDOW_SHOWN).enforceSDL;
+            flags).enforceSDL;
 
     renderer = SDL_CreateRenderer(
             window,
@@ -50,6 +53,10 @@ void init(int width, int height, string title) {
         }
     }
     _global = new GlobalGameObject();
+}
+
+enum WindowStatus {
+    fixed, resizable, maximized
 }
 
 /// meu2dフレームワークによる処理を開始します。

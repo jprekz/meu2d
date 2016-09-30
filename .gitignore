@@ -5,4 +5,4 @@ __dummy.html
 *.obj
 *.exe
 meu2d.lib
-exsamples/**/SDL2.dll
+SDL2.dll

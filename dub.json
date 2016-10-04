@@ -11,7 +11,7 @@
     },
 
     "subPackages": [
-        "./exsamples/example1/"
+        "./examples/example1/"
     ],
 
     "targetType": "library",

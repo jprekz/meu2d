@@ -73,15 +73,15 @@ struct Texture {
         auto image = loadImage(read(path));
         _x = _y = 0;
         _width = image.w; _height = image.h;
-        //why ABGR
+        auto surface = SDL_CreateRGBSurfaceFrom(
+            cast(void*)image.pixels, _width, _height,
+            32, _width * 4,
+            0x000000ff, 0x0000ff00, 0x00ff0000, 0xff000000
+        );
         texture = new SDLTexture(
-            SDL_CreateTexture(renderer,
-                              SDL_PIXELFORMAT_ABGR8888,
-                              SDL_TEXTUREACCESS_STATIC,
-                              _width,
-                              _height).enforceSDL);
-        SDL_SetTextureBlendMode(texture, SDL_BLENDMODE_BLEND);
-        SDL_UpdateTexture(texture, null, cast(void*)image.pixels, _width * 4).enforceSDL;
+            SDL_CreateTextureFromSurface(renderer, surface)
+        );
+        SDL_FreeSurface(surface);
     }
 
     // テクスチャの破棄をGCに任せる maybe works
@@ -98,14 +98,15 @@ struct Texture {
     this(ubyte[] pixels, int w, int h) {
         _width = w;
         _height = h;
+        auto surface = SDL_CreateRGBSurfaceFrom(
+            cast(void*)pixels, _width, _height,
+            32, _width * 4,
+            0x000000ff, 0x0000ff00, 0x00ff0000, 0xff000000
+        );
         texture = new SDLTexture(
-            SDL_CreateTexture(renderer,
-                              SDL_PIXELFORMAT_ABGR8888,
-                              SDL_TEXTUREACCESS_STATIC,
-                              _width,
-                              _height).enforceSDL);
-        SDL_SetTextureBlendMode(texture, SDL_BLENDMODE_BLEND);
-        SDL_UpdateTexture(texture, null, cast(void*)pixels, _width * 4).enforceSDL;
+            SDL_CreateTextureFromSurface(renderer, surface)
+        );
+        SDL_FreeSurface(surface);
     }
 
     /// 画像を座標(x, y)を左上として幅w, 高さhの範囲で切り取り，新しいTexture構造体として返します。

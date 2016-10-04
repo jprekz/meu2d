@@ -40,6 +40,8 @@ void init(int width, int height, string title, WindowStatus ws = WindowStatus.fi
             width,
             height,
             flags).enforceSDL;
+    Window.width = width;
+    Window.height = height;
 
     renderer = SDL_CreateRenderer(
             window,
@@ -70,10 +72,22 @@ void start() {
         SDL_Event event;
         while (SDL_PollEvent(&event)) {
             switch(event.type) {
-                case SDL_QUIT:
-                    break mainLoop;
-                default:
+                case SDL_WINDOWEVENT: {
+                    switch (event.window.event)  {
+                        case SDL_WINDOWEVENT_SIZE_CHANGED:  {
+                            Window.width = event.window.data1;
+                            Window.height = event.window.data2;
+                            break;
+                        }
+                        default: break;
+                    }
                     break;
+                }
+
+                case SDL_QUIT: {
+                    break mainLoop;
+                }
+                default: break;
             }
         }
         updateMouseState();
@@ -124,6 +138,10 @@ abstract class GameObject {
 
 GameObject global() {
     return _global;
+}
+
+struct Window {
+    static int width, height;
 }
 
 

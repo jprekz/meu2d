@@ -47,6 +47,8 @@ void init(int width, int height, string title, WindowStatus ws = WindowStatus.fi
             window,
             -1,
             SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC).enforceSDL;
+
+    SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
     
     class GlobalGameObject : GameObject {
         override void draw() {

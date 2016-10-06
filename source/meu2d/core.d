@@ -84,6 +84,12 @@ void start() {
                     break;
                 }
 
+                case SDL_MOUSEWHEEL: {
+                    Mouse.wheelX = event.wheel.x;
+                    Mouse.wheelY = event.wheel.y;
+                    break;
+                }
+
                 case SDL_QUIT: {
                     break mainLoop;
                 }
@@ -97,6 +103,8 @@ void start() {
             allDraw();
             SDL_RenderPresent(renderer);
         }
+
+        resetMouseWheel();
 
         //adjust FPS
         int delayTime = nextTime - SDL_GetTicks();

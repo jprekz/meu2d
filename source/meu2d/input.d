@@ -7,6 +7,7 @@ import meu2d.core;
 struct Mouse {
     static int x, y;
     static bool L, M, R;
+    static int wheelX, wheelY;
 }
 
 package void updateMouseState() {
@@ -14,6 +15,11 @@ package void updateMouseState() {
     Mouse.L = (buttons & SDL_BUTTON(1)) != 0;
     Mouse.M = (buttons & SDL_BUTTON(2)) != 0;
     Mouse.R = (buttons & SDL_BUTTON(3)) != 0;
+}
+
+package void resetMouseWheel() {
+    Mouse.wheelX = 0;
+    Mouse.wheelY = 0;
 }
 
 struct Key(string k) {
